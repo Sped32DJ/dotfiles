@@ -17,5 +17,8 @@ Using the [minimal-function-fox](https://github.com/mut-ex/minimal-functional-fo
 * App Launcher: Rofi and dmenu (both in sxhkd, each has their pros and cons)
 TODO: Make Rofi (dracula colors)[https://draculatheme.com/rofi]
 # Fonts
-*Kitty: Noto Sans (TODO: Change to Jetbrains or something)
-*Polybar: GoogleSans 
+* Kitty: Noto Sans (TODO: Change to Jetbrains or something)
+* Polybar: GoogleSans
+# TODO
+* Make this less of a mess lol
+
