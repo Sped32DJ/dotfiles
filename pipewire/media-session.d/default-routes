@@ -1,0 +1,16 @@
+{
+ "default.route.alsa_card.pci-0000_05_00.1:profile:off": [ ],
+ "default.route.alsa_card.pci-0000_00_1b.0:profile:off": [ ],
+ "default.route.alsa_card.usb-Focusrite_Scarlett_2i2_USB-00:profile:off": [ ],
+ "default.route.alsa_card.pci-0000_05_00.1:profile:output:hdmi-stereo-extra1": [ "hdmi-output-1" ],
+ "default.route.alsa_card.pci-0000_00_1b.0:profile:output:iec958-stereo": [ "iec958-stereo-output" ],
+ "default.route.alsa_card.usb-Focusrite_Scarlett_2i2_USB-00:profile:output:analog-stereo+input:analog-stereo": [ "analog-input", "analog-output" ],
+ "default.route.alsa_card.pci-0000_05_00.1:output:hdmi-output-1": { "mute": false, "volumes": [ 1.000000, 1.000000 ], "channels": [ "FL", "FR" ] },
+ "default.route.alsa_card.usb-Focusrite_Scarlett_2i2_USB-00:input:analog-input": { "mute": false, "volumes": [ 1.000000, 1.000000 ], "channels": [ "FL", "FR" ] },
+ "default.route.alsa_card.usb-Focusrite_Scarlett_2i2_USB-00:output:analog-output": { "mute": false, "volumes": [ 1.000000, 1.000000 ], "channels": [ "FL", "FR" ] },
+ "default.route.alsa_card.usb-Microsoft_Microsoft___LifeCam_Cinema_TM_-02:profile:off": [ ],
+ "default.route.alsa_card.usb-Microsoft_Microsoft___LifeCam_Cinema_TM_-02:profile:input:mono-fallback": [ "analog-input-mic" ],
+ "default.route.alsa_card.pci-0000_00_1b.0:output:iec958-stereo-output": { "mute": false, "volumes": [ 1.000000, 1.000000 ], "channels": [ "FL", "FR" ] },
+ "default.route.alsa_card.usb-Microsoft_Microsoft___LifeCam_Cinema_TM_-02:input:analog-input-mic": { "mute": false, "volumes": [ 0.000552 ], "channels": [ "MONO" ] },
+ "default.route.alsa_card.pci-0000_05_00.1:profile:output:hdmi-stereo": [ ]
+}
