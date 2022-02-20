@@ -16,7 +16,7 @@ The superior picom compositor with blur, rounded corners
 * Notifications: dunst
 * App Launcher: Rofi and dmenu (both in sxhkd, each has their pros and cons)
 TODO: Make Rofi [dracula colors](https://draculatheme.com/rofi)
-# Programs I like
+# Programs I like (These programs will be in /bin)
 * Anime Browser: [ani-cli](https://github.com/pystardust/ani-cli)
 * [QMK](https://github.com/qmk/qmk_firmware) / [VIA](https://github.com/the-via/firmware) My favorite keyboard drivers, I use it on my GMMK Pro and KBD67 Lite
 # Fonts
