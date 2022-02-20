@@ -56,7 +56,7 @@ require("onedark").setup  {
     },
 }
 
-vim.cmd("colorscheme enfocado")
+vim.cmd("colorscheme onedark")
 
 function _G.make_codeart_transparent()
   vim.cmd
