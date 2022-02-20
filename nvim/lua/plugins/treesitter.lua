@@ -12,16 +12,21 @@ nvim_treesitter.setup {
     enable = true,
   },
   indent = {
-    enable = true
+    enable = true,
+    disable = { "python" },
   },
   autotag = {
     enable = true
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = true,
   }
 }
 
 vim.cmd
 [[
-autocmd BufEnter * set foldmethod=expr
-autocmd BufEnter * set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 ]]

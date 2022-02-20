@@ -1,8 +1,27 @@
 local use = require("packer").use
-local user_settings_file = require("../user_settings")
+local user_settings_file = require("user_settings")
 
 return require("packer").startup({function()
   use { "wbthomason/packer.nvim" }
+
+  -- These three plugins make CodeArt startup faster.
+  -- In addition FixCursorHold can fix this bug:
+  -- https://github.com/neovim/neovim/issues/12587
+  use {
+    "lewis6991/impatient.nvim",
+    config = function ()
+      require("impatient")
+    end
+  }
+  use {
+    "nathom/filetype.nvim",
+    config = function ()
+      vim.g.did_load_filetypes = 1
+    end
+  }
+  use {
+    "antoinemadec/FixCursorHold.nvim"
+  }
 
   -- Color schemes.
   use { "folke/tokyonight.nvim" }
@@ -29,17 +48,9 @@ return require("packer").startup({function()
   -- This plugin adds indentation guides to all lines (including empty lines).
   use {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
-    setup = function()
-      require("plugins/indent-blankline")
-    end
-  }
-
-  -- This plugin show trailing whitespace.
-  use {
-    "ntpeters/vim-better-whitespace",
+    event = "BufEnter",
     config = function()
-        require("plugins/better-whitespace")
+      require("plugins/indent-blankline")
     end
   }
 
@@ -84,18 +95,7 @@ return require("packer").startup({function()
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    event = "BufRead",
-    cmd = {
-      "TSInstall",
-      "TSInstallSync",
-      "TSBufEnable",
-      "TSBufToggle",
-      "TSEnableAll",
-      "TSInstallFromGrammer",
-      "TSToggleAll",
-      "TSUpdate",
-      "TSUpdateSync"
-    },
+    after = "impatient.nvim",
     config = function()
       require("plugins/treesitter")
     end
@@ -104,7 +104,7 @@ return require("packer").startup({function()
   -- Colorizer (for highlighting color codes).
   use {
     "norcalli/nvim-colorizer.lua",
-    event = "BufRead",
+    event = "BufEnter",
     config = function()
       require("plugins/colorize")
       vim.cmd("ColorizerAttachToBuffer")
@@ -126,79 +126,114 @@ return require("packer").startup({function()
       "SessionSave"
     },
     setup = function()
-        require("plugins/dashboard")
+      require("plugins/dashboard")
     end
   }
 
-  -- Fuzzy finder and it requirments.
-  -- TODO: lazy load plenary, popup and telescope-media-files
-  use { "nvim-lua/plenary.nvim" }
+  use {
+    "nvim-lua/plenary.nvim",
+  }
+
   use {
     "nvim-telescope/telescope-fzf-native.nvim", run = "make",
     cmd = "Telescope"
   }
   use {
+    "artart222/telescope_find_directories",
+    after = "telescope-fzf-native.nvim"
+  }
+  use {
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
+    after = "telescope_find_directories",
     config = function()
       require("plugins/telescope")
     end
   }
-  local os = vim.loop.os_uname().sysname
-  if os == "Linux" then
-    use {
-      "nvim-lua/popup.nvim",
-      cmd = "Telescope"
-    }
-    use {
-      "nvim-telescope/telescope-media-files.nvim",
-      after = "popup.nvim"
-    }
-  end
 
   -- LSP, LSP installer and tab completion.
-  use { "neovim/nvim-lspconfig" }
-  use { "williamboman/nvim-lsp-installer" }
   use {
-     "rafamadriz/friendly-snippets",
-     event = "InsertEnter"
+    "neovim/nvim-lspconfig",
+    event = "BufEnter"
+  }
+  use {
+    "williamboman/nvim-lsp-installer",
+    after = "nvim-lspconfig",
+    config = function()
+      require("../lsp")
+    end
+  }
+  use {
+    "rafamadriz/friendly-snippets",
+    event = "InsertEnter"
   }
   use {
     "hrsh7th/nvim-cmp",
     after = "friendly-snippets",
-    requires = {
-      "hrsh7th/cmp-nvim-lsp"
-    },
     config = function()
       require("plugins/cmp")
     end
   }
   use {
-    "L3MON4D3/LuaSnip",
-    after = "nvim-cmp"
-  }
-  use {
-    "saadparwaiz1/cmp_luasnip",
-    after = "LuaSnip"
-  }
-  use {
     "hrsh7th/cmp-buffer",
-    after = "cmp_luasnip"
+    after = "nvim-cmp"
   }
   use {
     "hrsh7th/cmp-path",
     after = "cmp-buffer"
   }
   use {
+    "hrsh7th/cmp-nvim-lsp",
+    after = "nvim-lsp-installer"
+  }
+  use {
+    "L3MON4D3/LuaSnip",
+    after = "nvim-cmp",
+    config = function ()
+      require("luasnip/loaders/from_vscode").load()
+
+    end
+  }
+  use {
+    "saadparwaiz1/cmp_luasnip",
+     after = "LuaSnip"
+  }
+  -- TODO: Lazyload this on just lua filetype.
+  use {
     "hrsh7th/cmp-nvim-lua",
-    after = "cmp-nvim-lsp"
+    after = "nvim-cmp"
   }
 
   -- LSP signature.
-  use { "ray-x/lsp_signature.nvim" }
+  use {
+    "ray-x/lsp_signature.nvim",
+    after = "nvim-lspconfig",
+    config = function ()
+      require("lsp_signature").setup()
+    end
+  }
 
-  -- VsCode like pictograms for lsp.
-  use { "onsails/lspkind-nvim" }
+  -- TODO: Do better lazyloading here for dap.
+  use {
+    "mfussenegger/nvim-dap",
+    event = "BufRead",
+  }
+  use {
+    "Pocco81/DAPInstall.nvim",
+    after = "nvim-dap"
+  }
+  use {
+    "rcarriga/nvim-dap-ui",
+    after = "DAPInstall.nvim",
+    config = function ()
+      require("plugins/dap")
+    end
+  }
+
+  -- Code formatter.
+  use {
+    "sbdchd/neoformat",
+    cmd = "Neoformat"
+  }
 
   -- View and search LSP symbols, tags in Neovim.
   use {
@@ -212,7 +247,7 @@ return require("packer").startup({function()
   -- Terminal.
   use {
     "akinsho/nvim-toggleterm.lua",
-    cmd = "ToggleTerm",
+    event = "BufEnter",
     config = function()
       require("plugins/toggleterm")
     end
@@ -221,6 +256,7 @@ return require("packer").startup({function()
   -- Git support for nvim.
   use {
     "tpope/vim-fugitive",
+    cmd = "Git"
   }
 
   -- Git signs.
@@ -228,7 +264,7 @@ return require("packer").startup({function()
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
     config = function()
-      require("gitsigns").setup()
+      require("plugins/gitsigns")
     end
   }
 
@@ -243,7 +279,7 @@ return require("packer").startup({function()
   -- This is for html and it can autorename too!
   use {
     "windwp/nvim-ts-autotag",
-    after = "nvim-treesitter",
+    after = "nvim-treesitter"
   }
 
   -- Scrollbar.
@@ -275,7 +311,15 @@ return require("packer").startup({function()
 
   -- WhichKey is a lua plugin that displays a popup with possible
   -- key bindings of the command you started typing.
-  use { "folke/which-key.nvim" }
+  use {
+    "folke/which-key.nvim",
+    event = "VimEnter",
+    config = function()
+      require("maps")
+      require("user_settings")
+      require("plugins/which_key")
+    end
+  }
 
   -- A plugin for neovim that automatically creates missing directories
   -- on saving a file.
@@ -287,18 +331,21 @@ return require("packer").startup({function()
     end
   }
 
-  -- Neovim plugin to comment text in and out.
-  -- Supports commenting out the current line, a visual selection and a motion.
+  -- Neovim plugin to comment in/out text.
   use {
-    "terrortylor/nvim-comment",
-    cmd = "CommentToggle",
-    config = function()
-      require("nvim_comment").setup()
-    end
+    "b3nj5m1n/kommentary",
+    after = "nvim-treesitter",
+  }
+  use {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    after = "kommentary",
   }
 
   -- match-up is a plugin that lets you highlight, navigate, and operate on sets of matching text.
-  use { "andymass/vim-matchup" }
+  use {
+    "andymass/vim-matchup",
+    event = "BufRead"
+  }
 
   -- With this plugin you can resize Neovim buffers easily.
   use {
@@ -306,7 +353,7 @@ return require("packer").startup({function()
     event = "BufEnter"
   }
 
-  for key, plugin in pairs(additional_plugins) do
+  for _, plugin in pairs(additional_plugins) do
     if type(plugin) == "string" then
       use { plugin }
     else
@@ -314,15 +361,12 @@ return require("packer").startup({function()
     end
   end
 
-  -- Import settings of plugins or start plugins.
-  require("lsp_signature").setup()
-  require("which-key").setup()
-
-end,
-config = {
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "single" })
-    end
+  end,
+  config = {
+    display = {
+      open_fn = function()
+        return require("packer.util").float({ border = "single" })
+      end
+    }
   }
-}})
+})

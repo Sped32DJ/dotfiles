@@ -1,12 +1,35 @@
 -- Defining alias for vim.opt.
 local opt = vim.opt
+local exec = vim.api.nvim_exec
+
+local NoWhitespace = exec(
+    [[
+    function! NoWhitespace()
+        let l:save = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:save)
+    endfunction
+    call NoWhitespace()
+    ]],
+    true
+)
+
+-- Decrease time of completion menu.
+opt.updatetime = 300
+vim.g.cursorhold_updatetime = 100
 
 -- Number settings.
 opt.number = true
 opt.numberwidth = 2
 opt.relativenumber = true
 
--- True color support.
+-- Set signcolumn width to 2
+vim.opt.signcolumn = "yes:3"
+
+-- Remove showing mode.
+opt.showmode = false
+
+-- True collor support.
 opt.termguicolors = true
 
 -- Enable clipboard.
@@ -14,12 +37,6 @@ opt.clipboard = "unnamedplus"
 
 -- Enable mouse in all modes.
 opt.mouse = "a"
-
--- Performance: Change shell
-opt.shell="/usr/bin/dash"
-
--- Auto open NvimTree (nvm, bad idea, just make a keybind lol)
--- opt.NvimTreeOpen
 
 -- Enable cursor line.
 opt.cursorline = true
@@ -34,12 +51,12 @@ opt.colorcolumn = "9999"
 opt.hidden = true
 
 -- Set indentation stuf.
-opt.tabstop = 4
+opt.tabstop = 8
 opt.shiftwidth = 4
 opt.smartindent = true
 opt.smartcase = true
 opt.expandtab = true
-opt.smarttab = true
+opt.pumheight = 25 -- pop up menu height
 
 -- Set searching stuf.
 opt.hlsearch = true
@@ -61,14 +78,10 @@ opt.splitright = true
 opt.ruler = true
 
 -- Setting time that Neovim wait after each keystroke.
-opt.ttimeoutlen = 20
-opt.timeoutlen = 1000
+opt.timeoutlen = 200
 
 -- Setting up autocomplete menu.
 opt.completeopt = "menuone,noselect"
-
--- Add cursorline and diasable it in terminal
-vim.cmd("autocmd WinEnter,BufEnter * if &ft is \"toggleterm\" | set nocursorline | else | set cursorline | endif")
 
 -- Set line number for help files.
 vim.cmd
@@ -79,12 +92,15 @@ augroup help_config
 augroup END
 ]]
 
+-- Trim Whitespace
+exec([[au BufWritePre * call NoWhitespace()]], false)
+
 -- Auto open nvim-tree when writing (nvim .) in command line
 -- and auto open Dashboard when nothing given as argument.
 vim.cmd
 [[
 if index(argv(), ".") >= 0
-  autocmd VimEnter * NvimTreeToggle
+  autocmd VimEnter * NvimTreeOpen
   bd1
 elseif len(argv()) == 0
   autocmd VimEnter * Dashboard
@@ -100,9 +116,6 @@ else
 endif
 ]]
 
-vim.cmd("autocmd BufWritePost plugins.lua source <afile>")
-
-
 -- NOTE: Your shell must be powershell in bellow code block because of :CodeArtUpdate command
 vim.cmd
 [[
@@ -116,3 +129,31 @@ endif
 ]]
 
 vim.cmd("command CodeArtTransparent lua make_codeart_transparent()")
+
+
+-- Add cursorline and diasable it in some buffers and filetypes.
+statusline_hide = {
+  "dashboard",
+  "TelescopePrompt",
+  "TelescopeResults",
+  "terminal",
+  "toggleterm"
+}
+
+function hide_statusline(types)
+  for _,type in pairs(types) do
+    if vim.bo.filetype == type or vim.bo.buftype == type then
+      opt.laststatus = 0
+      opt.ruler = false
+      opt.cursorline = false
+      break
+    else
+      opt.laststatus = 2
+      opt.ruler = true
+      opt.cursorline = true
+    end
+  end
+end
+
+-- BufEnter,BufRead,BufWinEnter,FileType,WinEnter
+vim.cmd("autocmd BufEnter,BufRead,BufWinEnter,FileType,WinEnter * lua hide_statusline(statusline_hide)")
