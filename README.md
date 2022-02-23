@@ -27,4 +27,5 @@ TODO: Make Rofi [dracula colors](https://draculatheme.com/rofi)
 * Add screenshots
 * Add more to "Programs I like", also upload QMK and Via configs
 * Delete the vulgar comments in my config files lol
+* Add pictures, diagrams (look at Jonavin's GMMK Pro diagram), this applies to sxhkd to keeb keybinds (Just screenshot vial)
 
