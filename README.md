@@ -18,6 +18,7 @@ The superior picom compositor with blur, rounded corners
 TODO: Make Rofi [dracula colors](https://draculatheme.com/rofi)
 # Programs I like (My fav /bin files)
 * Anime Browser: [ani-cli](https://github.com/pystardust/ani-cli)
+* [Aniyomi](https://github.com/jmir1/aniyomi), A very good android APK that lets you stream / read manga
 * [QMK](https://github.com/qmk/qmk_firmware) / [VIA](https://github.com/the-via/firmware) My favorite keyboard drivers, I use it on my GMMK Pro and KBD67 Lite
 # Fonts
 * Kitty: Noto Sans (TODO: Change to Jetbrains or something)
