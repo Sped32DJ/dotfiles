@@ -14,14 +14,16 @@ alias ls="exa -a"
 alias ..="cd .."
 alias mv="mv -i"
 alias rm="rm -i"
-alias cp="cp -i"
+alias cp="cp -Ri"
 alias showschedule="sxiv $HOME/Desktop/System64/Schedule.png"
 alias mkdir="mkdir -p"
 alias weather="curl wttr.in"
+alias temp="curl 'wttr.in/?format=%t'"
 alias hack="echo access granted"
-alias sharkvpn="echo sudo openvpn /etc/openvpn/us-lax.prod.surfshark.comsurfshark_openvpn_udp.ovpn && cat ~/build/SurfShark/Login.txt"
+alias sharkvpn="echo doas openvpn /etc/openvpn/us-lax.prod.surfshark.comsurfshark_openvpn_udp.ovpn && cat ~/build/SurfShark/Login.txt" #Yes, I didnt even try to encrypt or have openvpn automatically do this for me
 alias whenthe="cat /usr/bin/whenthe"
 alias unmounthdds="sudo umount /mnt/lol && sudo mount /mnt/EXTRA"
+alias clip="xclip -o | qrencode -t utf8"
 
 # Neofetch
 alias chadfetch="neofetch --source ~/.config/neofetch/chad.txt"
