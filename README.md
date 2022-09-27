@@ -29,3 +29,6 @@ TODO: Make Rofi [dracula colors](https://draculatheme.com/rofi)
 * Add more to "Programs I like", also upload QMK and Via configs
 * Delete the vulgar comments in my config files lol
 * Add pictures, diagrams (look at Jonavin's GMMK Pro diagram), this applies to sxhkd to keeb keybinds (Just screenshot vial)
+# Dependacies
+* paru -S ripgrep neovim bat kitty bspwm sxhkd polybar picom-ibhagwan qmk Firefox paru kitty ranger bpytop fish mpv sxiv feh pipewire bash-pipes pipewire-pulse spicetify-cli-git   
+* TODO : Add the fonts
