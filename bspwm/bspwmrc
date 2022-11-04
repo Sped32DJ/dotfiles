@@ -56,7 +56,7 @@ xsetroot -cursor_name left_ptr &
 #Moutains with a nice sky, very blue
 #feh --bg-scale $HOME/Downloads/wallpapers-master/0062.jpg
 # Kobayashi Car
-feh --bg-scale $HOME/Downloads/wallpapers-master/smallhead2x.png
+# feh --bg-scale $HOME/Downloads/wallpapers-master/smallhead2x.png
 
 $HOME/.config/polybar/launch.sh
 setxkbmap -option caps:escape &
