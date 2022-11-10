@@ -19,7 +19,7 @@ TODO: Make Rofi [dracula colors](https://draculatheme.com/rofi)
 * To Watch anime: [ani-cli](https://github.com/pystardust/ani-cli) I even have a [MAL](https://myanimelist.net/profile/Sped32DJ)
 * [Aniyomi](https://github.com/jmir1/aniyomi), A very good android APK that lets you stream / read manga
 * [QMK](https://github.com/qmk/qmk_firmware) / [VIA](https://github.com/the-via/firmware) My favorite keyboard drivers, I use it on my GMMK Pro and KBD67 
-* Photo Editing: [PhotoGimp] (https://github.com/Diolinux/PhotoGIMP) or [Photoshop Working with WINE] (https://github.com/Gictorbit/photoshopCClinux)
+* Photo Editing: [PhotoGimp](https://github.com/Diolinux/PhotoGIMP) or [Photoshop Working with WINE](https://github.com/Gictorbit/photoshopCClinux)
 * [Hosts](https://github.com/StevenBlack/hosts) Is a great way to block the bad part of the internet including ads
 # Fonts
 * Kitty: JetBrainsMonoMedium Nerd Font Medium
