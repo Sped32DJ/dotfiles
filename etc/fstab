@@ -1,0 +1,26 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a device; this may
+# be used with UUID= as a more robust way to name devices that works even if
+# disks are added and removed. See fstab(5).
+#
+# <file system>             <mount point>  <type>  <options>  <dump>  <pass>
+#UUID=f6458e35-081d-4199-91b1-695d4bf34195   /             ext4   noatime                           0 1 
+#UUID=6BB3-D9FB                              /boot/efi     vfat   umask=0077                        0 2 
+#/dev/disk/by-label/lol                      /mnt/lol      auto   nosuid,nodev,nofail,x-gvfs-show   0 0 
+#/dev/disk/by-label/EXTRA                    /mnt/EXTRA    auto   nosuid,nodev,nofail,x-gvfs-show   0 0 
+#/dev/nvme0n1p1                              /mnt/nvme0n1p1 auto   nosuid,nodev,nofail,x-gvfs-show   0 0
+# swap file
+/swapfile                                   swap          swap   defaults                          0 0 
+
+#LABEL=4TB\040Media\040Disk /mnt/4TB\040Media\040Disk auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-uuid/53b1b9ee-a476-4459-b9fd-d457e7dc3f2b /mnt/53b1b9ee-a476-4459-b9fd-d457e7dc3f2b auto nosuid,nodev,nofail,x-gvfs-show 0 0
+#/dev/disk/by-uuid/8AE2-3185 /mnt/8AE2-3185 auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-label/EXTRA /mnt/EXTRA auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-label/lol /mnt/lol auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-uuid/A400B53300B50D74 /mnt/A400B53300B50D74 auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-uuid/AAF4B187F4B15673 /mnt/AAF4B187F4B15673 auto nosuid,nodev,nofail,x-gvfs-show 0 0
+#this for CPU pinning or sum shit
+hugetlbfs /dev/hugepages hugetlbfs defaults
+/dev/disk/by-label/Micro\134x20HDD /mnt/Micro\134x20HDD auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/dev/disk/by-label/Micro /mnt/Micro auto nosuid,nodev,nofail,x-gvfs-show 0 0

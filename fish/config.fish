@@ -14,14 +14,21 @@ alias ls="exa -a"
 alias ..="cd .."
 alias mv="mv -i"
 alias rm="rm -i"
-alias cp="cp -i"
-alias showschedule="sxiv $HOME/Desktop/System64/Schedule.png"
+alias cp="cp -Ri"
+#alias showschedule="sxiv $HOME/Desktop/System64/Schedule.png"
+alias sex="yt-dlp -x -o sex.opus "https://youtu.be/KAwyWkksXuo" && mplayer sex.opus"
 alias mkdir="mkdir -p"
 alias weather="curl wttr.in"
-alias hack="echo access granted"
-alias sharkvpn="echo sudo openvpn /etc/openvpn/us-lax.prod.surfshark.comsurfshark_openvpn_udp.ovpn && cat ~/build/SurfShark/Login.txt"
+alias temp="curl 'wttr.in/?format=%t'"
+alias transcat="queercat -f 1"
+alias discord="discord --no-sandbox"
+alias hack="echo access granted | lolcat -a -d 120"
+alias sl="sl -w"
+alias sharkvpn="echo doas openvpn /etc/openvpn/us-lax.prod.surfshark.comsurfshark_openvpn_udp.ovpn && cat ~/build/SurfShark/Login.txt" #Yes, I didnt even try to encrypt or have openvpn automatically do this for me
 alias whenthe="cat /usr/bin/whenthe"
 alias unmounthdds="sudo umount /mnt/lol && sudo mount /mnt/EXTRA"
+alias clip="xclip -o | qrencode -t utf8"
+alias storage="ncdu"
 
 # Neofetch
 alias chadfetch="neofetch --source ~/.config/neofetch/chad.txt"
@@ -42,7 +49,8 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 ## devour script (watch out, it swallows :)
 # alias mpv="devour mpv" #(Really annoying to swallow)
 # alias sxiv="devour sxiv"
-alias zathura="devour zathura"
+# alias zathura="devour zathura" # It swallows, but like, it brokey zathura
+alias ClearZathura="rm -rf ~/.local/share/zathura/history" # Zathura loves to brokey
 # alias spotify="devour spotify" (useless now, notification-daemon installed)
 alias okular="devour okular"
 
