@@ -9,7 +9,7 @@ TODO: Link wallpapers to match .bspwmrc
 * Compositor: picom-ibhagwan
 The superior picom compositor with blur, rounded corners  TODO: Patch in [Picom-animations-git](https://aur.archlinux.org/packages/picom-animations-git) features
 * Terminal: Kitty
-* Firefox: Using the [minimal-function-fox](https://github.com/mut-ex/minimal-functional-fox) with Dracula colors.
+* Firefox: Using the [minimal-function-fox](https://github.com/Sped32DJ/minimal-functional-fox) with Dracula colors.
 * Color Scheme: Dracula
 * File Manager: Ranger or PcManFM (TODO: not really riced)
 * Notifications: dunst (I am still using notification-daemon because I am too lazy to switch over lol)
