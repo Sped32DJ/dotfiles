@@ -1,4 +1,2 @@
--- sourcing config files.
-require("settings")
-require("plugins")
-require("theme")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
